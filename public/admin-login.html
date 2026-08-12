@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Login — Loket CS Test</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="theme-admin">
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Loket CS Test — Panel Admin</div>
+</div>
+
+<div class="shell" style="max-width: 420px; padding-top: 90px;">
+  <p class="eyebrow">Akses Terbatas</p>
+  <h1 style="font-size: 26px; margin-bottom: 20px;">Masuk sebagai HR/Admin</h1>
+
+  <div class="card">
+    <div id="errorBox"></div>
+    <form id="loginForm">
+      <label for="password">Password admin</label>
+      <input type="password" id="password" required placeholder="••••••••" />
+      <button type="submit" class="btn btn-amber btn-block" style="margin-top:20px;" id="loginBtn">
+        Masuk →
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("loginBtn");
+  const errorBox = document.getElementById("errorBox");
+  errorBox.innerHTML = "";
+  btn.disabled = true;
+  btn.textContent = "Memeriksa...";
+
+  try {
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: document.getElementById("password").value }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Login gagal.");
+
+    sessionStorage.setItem("admin_token", data.token);
+    window.location.href = "/admin.html";
+  } catch (err) {
+    errorBox.innerHTML = `<div class="error-box">${err.message}</div>`;
+    btn.disabled = false;
+    btn.textContent = "Masuk →";
+  }
+});
+</script>
+
+</body>
+</html>

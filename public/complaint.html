@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulasi Komplain — Loket CS Test</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Loket CS Test</div>
+  <div class="muted mono" style="font-size:12px;">Bagian 2 / 2 — Simulasi Komplain</div>
+</div>
+
+<div class="shell">
+  <div class="ticket-strip">
+    <div class="ticket-left">
+      <div class="ticket-no" id="ticketNo">TIKET #------</div>
+      <div class="ticket-label" id="platformLabel">Sesi Simulasi Komplain</div>
+    </div>
+    <div class="ticket-right" id="timerBox">
+      <div class="timer-value" id="timerValue">--:--</div>
+      <div class="timer-caption">Sisa Waktu</div>
+    </div>
+  </div>
+
+  <div id="errorBox"></div>
+
+  <div class="card">
+    <p class="muted" style="margin-top:0;">
+      Sebuah pelanggan (disimulasikan oleh AI) akan menghubungimu untuk komplain.
+      Tangani seperti kamu sedang benar-benar bertugas sebagai CS. Tidak ada
+      jawaban "benar/salah" di sini — seluruh percakapan akan dibaca langsung
+      oleh tim HR sebagai bagian dari penilaian.
+    </p>
+
+    <div class="chat-window" id="chatWindow">
+      <div class="empty-state" id="loadingState">Menghubungkan ke pelanggan...</div>
+    </div>
+
+    <div class="chat-input-row">
+      <textarea id="replyInput" placeholder="Ketik balasanmu sebagai CS..." disabled></textarea>
+      <button class="btn btn-primary" id="sendBtn" disabled>Kirim</button>
+    </div>
+
+    <hr class="divider" />
+    <button class="btn btn-amber btn-block" id="finishBtn" disabled>Selesaikan Test →</button>
+    <p class="finish-hint" id="finishHint"></p>
+  </div>
+</div>
+
+<script src="/js/questions.js"></script>
+<script src="/js/complaint.js"></script>
+</body>
+</html>

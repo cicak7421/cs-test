@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Test Administrasi CS — Shopee & TikTok Shop</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Loket CS Test</div>
+  <div class="muted mono" style="font-size:12px;">Shopee · TikTok Shop</div>
+</div>
+
+<div class="shell">
+  <p class="eyebrow">Test Administrasi — Customer Service</p>
+  <h1 style="font-size: 34px; margin: 0 0 8px;">Ambil nomor antrian tesmu.</h1>
+  <p class="muted" style="margin-bottom: 28px;">
+    Test ini terdiri dari 2 bagian: <strong>tes pengetahuan</strong> (pilihan ganda + esai singkat)
+    dan <strong>simulasi menangani komplain pelanggan</strong>. Masing-masing bagian punya
+    batas waktu berjalan otomatis — begitu waktu habis, jawaban yang sudah kamu isi
+    akan otomatis terkirim, jadi tidak perlu buru-buru klik apa pun.
+  </p>
+
+  <div class="card">
+    <h3 style="margin-top:0;">Data Diri Pelamar</h3>
+
+    <div id="errorBox"></div>
+
+    <form id="startForm">
+      <label for="name">Nama lengkap</label>
+      <input type="text" id="name" required placeholder="Nama sesuai KTP" />
+
+      <label for="email">Email aktif</label>
+      <input type="email" id="email" required placeholder="nama@email.com" />
+
+      <label for="phone">Nomor WhatsApp</label>
+      <input type="tel" id="phone" placeholder="08xxxxxxxxxx" />
+
+      <hr class="divider" />
+
+      <p class="muted" style="font-size: 13px;">
+        Dengan memulai test, kamu setuju jawaban dan transkrip simulasimu akan
+        disimpan dan ditinjau oleh tim HR untuk keperluan seleksi karyawan.
+      </p>
+
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+        Mulai Test →
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById("startForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("submitBtn");
+  const errorBox = document.getElementById("errorBox");
+  errorBox.innerHTML = "";
+  btn.disabled = true;
+  btn.textContent = "Menyiapkan tiket...";
+
+  const payload = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+  };
+
+  try {
+    const res = await fetch("/api/start-test", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Gagal memulai test.");
+
+    sessionStorage.setItem("candidate_id", data.candidate_id);
+    sessionStorage.setItem("started_at", data.started_at);
+    sessionStorage.setItem("knowledge_time_limit_minutes", data.knowledge_time_limit_minutes);
+    sessionStorage.setItem("complaint_time_limit_minutes", data.complaint_time_limit_minutes);
+
+    window.location.href = "/test.html";
+  } catch (err) {
+    errorBox.innerHTML = `<div class="error-box">${err.message}</div>`;
+    btn.disabled = false;
+    btn.textContent = "Mulai Test →";
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tes Pengetahuan — Loket CS Test</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Loket CS Test</div>
+  <div class="muted mono" style="font-size:12px;">Bagian 1 / 2 — Tes Pengetahuan</div>
+</div>
+
+<div class="shell">
+  <div class="ticket-strip">
+    <div class="ticket-left">
+      <div class="ticket-no" id="ticketNo">TIKET #------</div>
+      <div class="ticket-label">Sesi Tes Pengetahuan</div>
+    </div>
+    <div class="ticket-right" id="timerBox">
+      <div class="timer-value" id="timerValue">--:--</div>
+      <div class="timer-caption">Sisa Waktu</div>
+    </div>
+  </div>
+
+  <div id="errorBox"></div>
+
+  <div class="card">
+    <p class="muted" style="margin-top:0;">
+      Jawab semua pertanyaan berikut sesuai pemahamanmu. Jawaban tersimpan otomatis
+      di form ini — kirim manual lewat tombol di bawah, atau biarkan sistem
+      mengirim otomatis saat waktu habis.
+    </p>
+    <div id="questionsContainer"></div>
+
+    <hr class="divider" />
+    <button class="btn btn-primary btn-block" id="submitBtn">Kirim Jawaban →</button>
+  </div>
+</div>
+
+<script src="/js/questions.js"></script>
+<script src="/js/test.js"></script>
+</body>
+</html>
