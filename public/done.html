@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tes Selesai — PT Tre Joy Ease Indonesia</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><div class="logo">TJ</div><div>PT Tre Joy Ease Indonesia<small>Recruitment Center</small></div></div>
+</div>
+<div class="done" id="doneBox">
+  <div class="check">✓</div>
+  <h1 style="font-size:32px;margin-bottom:12px">Terima kasih, tesmu sudah terkirim.</h1>
+  <p class="muted">Jawaban dan transkrip simulasimu sudah tersimpan dan akan ditinjau tim HR PT Tre Joy Ease Indonesia. Jika lolos ke tahap berikutnya, kami menghubungimu lewat WhatsApp atau email yang kamu daftarkan.</p>
+</div>
+<script>
+if (new URLSearchParams(location.search).get("r") === "violation") {
+  var box = document.getElementById("doneBox");
+  box.querySelector(".check").textContent = "!";
+  box.querySelector("h1").textContent = "Tesmu diakhiri otomatis.";
+  box.querySelector("p").textContent = "Sistem mendeteksi kamu keluar dari halaman tes (minimize, membuka tab baru, atau menutup aplikasi). Sesuai aturan, tes langsung diakhiri dan jawaban yang sudah terisi tetap dikirim ke tim HR untuk ditinjau.";
+}
+</script>
+</body>
+</html>

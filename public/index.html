@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rekrutmen Customer Service PT Tre Joy Ease Indonesia</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='26' fill='%235B45F0'/><text x='50' y='66' font-size='46' font-weight='800' text-anchor='middle' fill='white' font-family='sans-serif'>TJ</text></svg>" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><div class="logo">TJ</div><div>PT Tre Joy Ease Indonesia<small>Recruitment Center</small></div></div>
+  <div class="topbar-note">Lowongan Customer Service</div>
+</div>
+
+<main class="hero">
+  <section>
+    <span class="eyebrow">Seleksi Customer Service Shopee &amp; TikTok Shop</span>
+    <h1>Tunjukkan caramu menenangkan pelanggan yang sedang kesal.</h1>
+    <p class="lead">Tes online 15 menit untuk seluruh soal, bisa dikerjakan dari HP atau laptop. Kami menilai ketelitian, pemahaman kebijakan marketplace, dan cara kamu membalas chat pelanggan.</p>
+
+    <ul class="stages">
+      <li><span class="ic">1</span><div><b>Tes pengetahuan</b><span class="muted">Pilihan ganda, tes ketelitian angka/resi, dan esai singkat.</span></div></li>
+      <li><span class="ic">2</span><div><b>Simulasi komplain</b><span class="muted">Kamu membalas pelanggan yang diperankan AI, seperti chat sungguhan.</span></div></li>
+      <li><span class="ic">3</span><div><b>Ditinjau tim HR</b><span class="muted">Kandidat terbaik kami hubungi lewat WhatsApp atau email.</span></div></li>
+    </ul>
+
+    <div class="rules">
+      <b>Aturan tes, mohon dibaca</b>
+      <ul>
+        <li>Waktu 15 menit berlaku untuk seluruh soal dan terus berjalan sampai selesai.</li>
+        <li>Jangan minimize browser atau aplikasi, dan jangan menutup halaman tes.</li>
+        <li>Jangan membuka tab baru atau berpindah ke aplikasi lain selama tes.</li>
+        <li>Jika terdeteksi, tes langsung diakhiri otomatis dan jawaban yang sudah terisi dikirim apa adanya. Tes tidak bisa diulang.</li>
+      </ul>
+    </div>
+
+    <div class="chat-peek" aria-hidden="true">
+      <div class="bar"><i></i> Contoh percakapan simulasi</div>
+      <div class="bubble c">Paketnya udah 6 hari belum sampai! Statusnya cuma "dikirim" terus!</div>
+      <div class="bubble a">Mohon maaf atas ketidaknyamanannya, Kak. Boleh kirim nomor pesanannya? Saya cek posisi paketnya sekarang.</div>
+    </div>
+  </section>
+
+  <section class="card form-card">
+    <h3>Daftar dan mulai tes</h3>
+    <p class="muted" style="font-size:13.5px">Isi data diri, lalu timer 15 menit langsung berjalan. Siapkan koneksi yang stabil dan jangan tinggalkan halaman tes.</p>
+    <div id="errorBox"></div>
+    <form id="startForm">
+      <label for="name">Nama lengkap</label>
+      <input type="text" id="name" required minlength="3" placeholder="Sesuai KTP" autocomplete="name" />
+      <label for="email">Email aktif</label>
+      <input type="email" id="email" required placeholder="nama@email.com" autocomplete="email" />
+      <label for="phone">Nomor WhatsApp</label>
+      <input type="tel" id="phone" required placeholder="08xxxxxxxxxx" autocomplete="tel" />
+      <label style="display:flex;gap:10px;align-items:flex-start;font-weight:500;color:var(--soft);margin-top:20px">
+        <input type="checkbox" id="agree" required style="margin-top:4px;accent-color:var(--brand);width:auto" />
+        <span>Saya setuju jawaban dan transkrip simulasi saya disimpan dan ditinjau tim HR PT Tre Joy Ease Indonesia untuk keperluan seleksi.</span>
+      </label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-weight:500;color:var(--soft);margin-top:14px">
+        <input type="checkbox" id="agreeRules" required style="margin-top:4px;accent-color:var(--brand);width:auto" />
+        <span>Saya sudah membaca aturan tes. Saya paham tes akan diakhiri otomatis jika saya minimize, membuka tab baru, atau menutup aplikasi.</span>
+      </label>
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn" style="margin-top:20px">Mulai tes sekarang</button>
+    </form>
+  </section>
+</main>
+
+<script>
+document.getElementById("startForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("submitBtn");
+  const errorBox = document.getElementById("errorBox");
+  errorBox.innerHTML = "";
+  btn.disabled = true;
+  btn.textContent = "Menyiapkan sesi tes...";
+  const payload = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+  };
+  try {
+    const res = await fetch("/api/start-test", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Gagal memulai tes.");
+    sessionStorage.setItem("candidate_id", data.candidate_id);
+    sessionStorage.setItem("started_at", data.started_at);
+    sessionStorage.setItem("knowledge_time_limit_minutes", data.knowledge_time_limit_minutes);
+    sessionStorage.setItem("complaint_time_limit_minutes", data.complaint_time_limit_minutes);
+    window.location.href = "/test.html";
+  } catch (err) {
+    errorBox.textContent = err.message;
+    errorBox.className = "error-box";
+    btn.disabled = false;
+    btn.textContent = "Mulai tes sekarang";
+  }
+});
+</script>
+</body>
+</html>

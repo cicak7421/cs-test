@@ -1,0 +1,9 @@
+{
+  "name": "tre-joy-ease-recruitment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Platform seleksi customer service PT Tre Joy Ease Indonesia (Shopee & TikTok Shop) dengan simulasi AI komplain via Groq.",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

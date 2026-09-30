@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simulasi Komplain — PT Tre Joy Ease Indonesia</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><div class="logo">TJ</div><div>PT Tre Joy Ease Indonesia<small>Recruitment Center</small></div></div>
+  <div class="topbar-note">Tahap 2 dari 2 · Simulasi Komplain</div>
+</div>
+<div class="shell">
+  <div class="ticket-strip">
+    <div>
+      <div class="ticket-no" id="ticketNo">Sesi #------</div>
+      <div class="ticket-label" id="platformLabel">Simulasi komplain pelanggan</div>
+    </div>
+    <div class="ticket-right" id="timerBox">
+      <div class="timer-value" id="timerValue">--:--</div>
+      <div class="timer-caption">Sisa waktu</div>
+    </div>
+  </div>
+  <div id="errorBox"></div>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Pelanggan (diperankan AI) akan menghubungimu untuk komplain. Tangani seperti sedang bertugas sebagai CS: sapa dengan ramah, tunjukkan empati, gali datanya, lalu beri solusi yang jelas. Seluruh percakapan dinilai tim HR. Waktu 15 menit dihitung sejak tes dimulai. Jangan minimize, jangan membuka tab baru, dan jangan menutup aplikasi, karena tes akan langsung diakhiri otomatis.</p>
+    <div class="chat-window" id="chatWindow">
+      <div class="empty-state" id="loadingState">Menghubungkan ke pelanggan...</div>
+    </div>
+    <div class="chat-input-row">
+      <textarea id="replyInput" placeholder="Ketik balasanmu sebagai CS. Enter untuk kirim, Shift+Enter untuk baris baru." disabled></textarea>
+      <button class="btn btn-primary" id="sendBtn" disabled>Kirim</button>
+    </div>
+    <hr class="divider" />
+    <button class="btn btn-dark btn-block" id="finishBtn" disabled>Selesaikan tes</button>
+    <p class="finish-hint" id="finishHint"></p>
+  </div>
+</div>
+<script src="/js/questions.js"></script>
+<script src="/js/guard.js"></script>
+<script src="/js/complaint.js"></script>
+</body>
+</html>

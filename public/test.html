@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tes Pengetahuan — PT Tre Joy Ease Indonesia</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="topbar">
+  <div class="brand"><div class="logo">TJ</div><div>PT Tre Joy Ease Indonesia<small>Recruitment Center</small></div></div>
+  <div class="topbar-note">Tahap 1 dari 2 · Tes Pengetahuan</div>
+</div>
+<div class="shell">
+  <div class="ticket-strip">
+    <div>
+      <div class="ticket-no" id="ticketNo">Sesi #------</div>
+      <div class="progress" style="margin-top:6px"><i id="progressBar"></i></div>
+      <div class="answered" id="answeredText">0 dari 0 terjawab</div>
+    </div>
+    <div class="ticket-right" id="timerBox">
+      <div class="timer-value" id="timerValue">--:--</div>
+      <div class="timer-caption">Sisa waktu</div>
+    </div>
+  </div>
+  <div id="errorBox"></div>
+  <div class="card">
+    <p class="muted" style="margin-top:0">Jawab semua soal sesuai pemahamanmu. Saat waktu habis, jawaban yang sudah terisi terkirim otomatis. Waktu 15 menit berlaku untuk seluruh soal, termasuk simulasi komplain. Jangan minimize, jangan membuka tab baru, dan jangan menutup aplikasi. Jika itu terjadi, tes langsung diakhiri otomatis.</p>
+    <div id="questionsContainer"></div>
+    <hr class="divider" />
+    <button class="btn btn-primary btn-block" id="submitBtn">Kirim jawaban dan lanjut ke simulasi</button>
+  </div>
+</div>
+<script src="/js/questions.js"></script>
+<script src="/js/guard.js"></script>
+<script src="/js/test.js"></script>
+</body>
+</html>

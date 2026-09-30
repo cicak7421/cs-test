@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/admin/evaluate.js": { "maxDuration": 60 },
+    "api/generate-complaint.js": { "maxDuration": 30 },
+    "api/save-complaint-message.js": { "maxDuration": 30 }
+  }
+}
